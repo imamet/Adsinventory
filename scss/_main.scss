@@ -1,0 +1,271 @@
+// main
+.main {
+    position: relative;
+    &__title {
+        text-align: center;
+        color: #ffffff;
+        padding: 50px 0px;
+        &__sub {
+            text-align: center;
+            font-weight: 100;
+        }
+    }
+    &__widged {
+        &__video {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            img {
+                border-radius: 10px;
+            }
+            &--btnplay {
+                background: #DB1F25;
+                position: absolute;
+                top: 0;
+                height: 60px;
+                width: 60px;
+                z-index: 5;
+                width: 40px;
+                height: 40px;
+                border-radius: 0px 0px 10px 10px;
+                text-align: center;
+                right: 13px;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                img {
+                    width: 65% !important;
+                }
+            }
+        }
+        &__item {
+            padding: 10px 0px;
+        }
+        &__box {
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+            display: flex;
+            height: 237px;
+            border-radius: 15px;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #ffffff;
+            img {
+                width: 100%;
+            }
+            iframe {
+                border-radius: 10px !important;
+            }
+            &--title {
+                position: absolute;
+                font-weight: bold;
+                color: #2d3c49;
+                font-size: 28px;
+                text-align: center;
+            }
+            &--subtitle {
+                position: absolute;
+                font-weight: 100;
+                color: grey;
+                font-size: 14px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                margin: auto;
+            }
+        }
+        &__tools {
+            position: absolute;
+            bottom: 0;
+            height: 45px;
+            background: #161925;
+            display: flex;
+            flex-wrap: nowrap;
+            width: 100%;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            color: #ffffff;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            &--1 {
+                width: 10%;
+                ul {
+                    width: 100%;
+                }
+                li {
+                    list-style-type: disc;
+                    text-align: center;
+                }
+            }
+            &--2 {
+                width: 80%;
+                font-size: 18px;
+            }
+            &--3 {
+                width: 10%;
+                img {
+                    width: 70%;
+                }
+            }
+        }
+        &__preview {
+            text-align: center;
+            padding-bottom: 30px;
+            span {
+                padding: 5px;
+            }
+            &--see {
+                padding-top: -10px;
+                font-size: 12px;
+                color: grey;
+            }
+        }
+    }
+}
+
+// nav humberger
+$fg:#00bcd4;
+$bg:#673ab7;
+$pi:3.14;
+//config
+$menu-items:4;
+$open-distance:105px;
+$opening-angle:$pi*2;
+%goo {
+    filter: url('#shadowed-goo');
+    // debug 
+    //background:rgba(255,0,0,0.2);
+}
+
+%ball {
+    background: $fg;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    position: absolute;
+    top: 20px;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    transform: translate3d(0, 0, 0);
+    transition: transform ease-out 200ms;
+}
+
+.menu-open {
+    display: none;
+}
+
+.menu-item {
+    @extend %ball;
+}
+
+.hamburger {
+    $width: 25px;
+    $height: 3px;
+    width: $width;
+    height: $height;
+    background: white;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -$width/2;
+    margin-top: -$height/2;
+    transition: transform 200ms;
+}
+
+$hamburger-spacing:5px;
+.hamburger-1 {
+    transform: translate3d(0, -$hamburger-spacing, 0);
+}
+
+.hamburger-2 {
+    transform: translate3d(0, 0, 0);
+}
+
+.hamburger-3 {
+    transform: translate3d(0, $hamburger-spacing, 0);
+}
+
+.menu-open:checked+.menu-open-button {
+    .hamburger-1 {
+        transform: translate3d(0, 0, 0) rotate(45deg);
+    }
+    .hamburger-2 {
+        transform: translate3d(0, 0, 0) scale(0.1, 1);
+    }
+    .hamburger-3 {
+        transform: translate3d(0, 0, 0) rotate(-45deg);
+    }
+}
+
+.menu {
+    @extend %goo;
+    $width: 500px;
+    $height: 150px;
+    position: absolute;
+    left: 4%;
+    margin-left: -80px;
+    padding-top: 20px;
+    padding-left: 80px;
+    width: 650px;
+    bottom: 3%;
+    height: 150px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 20px;
+    text-align: left;
+}
+
+.menu-item {
+    &:hover {
+        background: white;
+        color: $fg;
+    }
+    @for $i from 1 through $menu-items {
+        &:nth-child(#{$i+2}) {
+            transition-duration: 180ms;
+        }
+    }
+}
+
+.menu-open-button {
+    @extend %ball;
+    z-index: 2;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transition-duration: 400ms;
+    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    cursor: pointer;
+}
+
+.menu-open-button:hover {
+    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+.menu-open:checked+.menu-open-button {
+    transition-timing-function: linear;
+    transition-duration: 200ms;
+    transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+}
+
+.menu-open:checked~.menu-item {
+    transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+    @for $i from 1 through $menu-items {
+        &:nth-child(#{$i+2}) {
+            transition-duration: 90ms+(100ms*$i);
+            transform: translate3d(110px*$i, 0, 0);
+        }
+    }
+}
+
+#container {
+    opacity: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
